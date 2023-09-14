@@ -25,6 +25,7 @@
 </head>
 
 <body>
+  <!-- Begin page -->
   <div class="app is-default">
     <div class="layout">
       <!-- Topbar -->
@@ -64,177 +65,6 @@
       <!-- End of Topbar -->
 
       <!-- Sidebar -->
-      <div id="app">
-        <div class="container-fluid">
-          <div class="row justify-content-md-center">
-            <h3 class="mb-4"><i class="fa-solid fa-rotate fa-spin"></i> {{ title }}</h3>
-
-            <template v-if="accessToken">
-              <div class="col-3">
-                <div class="nav flex-column nav-pills me-3 mb-4" id="v-pills-tab" role="tablist"
-                  aria-orientation="vertical">
-                  <button :class="[activeTab == 0 ? 'nav-link active' : 'nav-link']" @click="activeTab = 0">
-                    Home
-                  </button>
-                  <button :class="[activeTab == 1 ? 'nav-link active' : 'nav-link']" @click="getBusinesses()">
-                    Businesses
-                  </button>
-                  <button :class="[activeTab == 2 ? 'nav-link active' : 'nav-link']" @click="activeTab = 2">
-                    Ad Accounts
-                  </button>
-                  <button :class="[activeTab == 3 ? 'nav-link active' : 'nav-link']" @click="activeTab = 3">
-                    Pages
-                  </button>
-                  <button :class="[activeTab == 4 ? 'nav-link active' : 'nav-link']" @click="activeTab = 4">
-                    Ad Sets
-                  </button>
-                  <button :class="[activeTab == 5 ? 'nav-link active' : 'nav-link']" @click="activeTab = 5">
-                    Insights
-                  </button>
-                  <button class="nav-link" @click="logout()">Logout</button>
-                </div>
-              </div>
-              <div class="col-9">
-                <div class="tab-content" id="v-pills-tabContent">
-                  <div :class="[activeTab == 1 ? 'tab-pane fade active show' : 'tab-pane fade']" id="v-pills-tab-1"
-                    role="tabpanel">
-                    <h3>Businesses</h3>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Business ID</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Total Ad Accounts</th>
-                          <th scope="col">Total Pages</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(business, index) in businesses">
-                          <th scope="row">{{ index + 1 }}</th>
-                          <td>{{ business.id }}</td>
-                          <td>{{ business.name }}</td>
-                          <td>
-                            {{ business.owned_ad_accounts.summary.total_count +
-                            business.client_ad_accounts.summary.total_count }}
-                          </td>
-                          <td>{{ business.owned_pages.summary.total_count }}</td>
-                          <td>
-                            <button type="button" class="btn btn-primary" @click="getAdAccounts(business.id)">
-                              Get Ad Accounts
-                            </button>
-                            <button type="button" class="btn btn-primary" @click="getPages(business.id)">
-                              Get Pages
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div :class="[activeTab == 2 ? 'tab-pane fade active show' : 'tab-pane fade']" id="v-pills-tab-2"
-                    role="tabpanel">
-                    <h3>Ad Accounts</h3>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Account ID</th>
-                          <th scope="col">Name</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(adAccount, index) in adAccounts">
-                          <th scope="row">{{ index + 1 }}</th>
-                          <td>
-                            <a href="javascript:void(0)" @click="getAdSets(adAccount.id)">{{ adAccount.account_id }}
-                            </a>
-                          </td>
-                          <td>{{ adAccount.name }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div :class="[activeTab == 3 ? 'tab-pane fade active show' : 'tab-pane fade']" id="v-pills-tab-3"
-                    role="tabpanel">
-                    <h3>Pages</h3>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Page ID</th>
-                          <th scope="col">Name</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(page, index) in pages">
-                          <th scope="row">{{ index + 1 }}</th>
-                          <td>
-                            <a href="javascript:void(0)" @click="getPosts(page.id)">{{ page.id }}</a>
-                          </td>
-                          <td>{{ page.name }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                    <hr />
-                    <h3>Page Posts</h3>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Post ID</th>
-                          <th scope="col">Message</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(post, index) in posts">
-                          <th scope="row">{{ index + 1 }}</th>
-                          <td>{{ post.id }}</td>
-                          <td>{{ post.message }}</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div :class="[activeTab == 4 ? 'tab-pane fade active show' : 'tab-pane fade']" id="v-pills-tab-4"
-                    role="tabpanel">
-                    <h3>Ad Sets</h3>
-                    <table class="table">
-                      <thead>
-                        <tr>
-                          <th scope="col">#</th>
-                          <th scope="col">Ad Set ID</th>
-                          <th scope="col">Name</th>
-                          <th scope="col">Status</th>
-                          <th scope="col">Action</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr v-for="(adSet, index) in adSets">
-                          <th scope="row">{{ index + 1 }}</th>
-                          <td>{{ adSet.id }}</td>
-                          <td>{{ adSet.name }}</td>
-                          <td>{{ adSet.status }}</td>
-                          <td>
-                            <button type="button" class="btn btn-success btn-sm"
-                              @click="setAdSetStatus(adSet.id, 'ACTIVE')">
-                              Active
-                            </button>
-                            <button type="button" class="btn btn-danger btn-sm"
-                              @click="setAdSetStatus(adSet.id, 'PAUSED')">
-                              Pause
-                            </button>
-                          </td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </template>
-          </div>
-        </div>
-      </div>
-
       <div class="side-nav">
         <div class="side-nav-inner">
           <div id="vue_app_slide_bar">
@@ -476,6 +306,29 @@
       <!-- End Right content here -->
     </div>
   </div>
+  <!-- End of Page Wrapper -->
+  <!-- Footer -->
+  <footer class="footer">
+  </footer>
+  <!-- End of Footer -->
+  <!-- Core Vendors JS -->
+  <script src="./js/new_theme/vendors.min.js"></script>
+  {{--
+  <script src="./js/new_theme/jquery.min.js"></script>--}}
+  {{--
+  <script src="./js/new_theme/bootstrap.bundle.min.js"></script>--}}
+  <!-- Core JS -->
+  <script src="./js/new_theme/app.min.js"></script>
+  <!-- Other JS plugins -->
+  <script src="./plugins/toastr/toastr.min.js"></script>
+  <script src="./plugins/sweetalert/sweetalert.min.js"></script>
+  <script src="./plugins/momentjs/moment.js"></script>
+  <script src="./plugins/autosize/autosize.min.js"></script>
+  <script src="./assets/vendors/select2/select2.js"></script>
+  <!--User defined js code -->
+  <script src="./js/common.js"></script>
+  <script src="./js/user.js"></script>
+  <script src="./js/script_s3.js"></script>
 
   <div id="fb-root"></div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
