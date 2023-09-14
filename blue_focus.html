@@ -406,23 +406,6 @@
                           </tr>
                         </tbody>
                       </table>
-                      <h5 v-else-if="activeTab == 3" class="mb-0">Page Posts</h5>
-                      <table id="table-datatable" class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Post ID</th>
-                            <th scope="col">Message</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr v-for="(post, index) in posts">
-                            <th scope="row">{{ index + 1 }}</th>
-                            <td>{{ post.id }}</td>
-                            <td>{{ post.message }}</td>
-                          </tr>
-                        </tbody>
-                      </table>
                     </div>
                     <div :style="{'display': activeTab == 4 ? '' : 'none'}" class="table-responsive m-t-30">
                       <table id="table-datatable" class="table table-hover">
@@ -451,6 +434,33 @@
                                 Pause
                               </button>
                             </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div :style="{'display': activeTab == 3 ? '' : 'none'}" class="col-lg-12">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-center">
+                      <h5 class="mb-0">Page Posts</h5>
+                    </div>
+                    <div class="table-responsive m-t-30">
+                      <table id="table-datatable" class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Post ID</th>
+                            <th scope="col">Message</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(post, index) in posts">
+                            <th scope="row">{{ index + 1 }}</th>
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.message }}</td>
                           </tr>
                         </tbody>
                       </table>
