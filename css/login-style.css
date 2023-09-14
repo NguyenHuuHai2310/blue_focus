@@ -1,0 +1,110 @@
+button#btn_login_gg_hidden {
+    position: absolute;
+    z-index: -1;
+    padding: 0;
+    border: none;
+}
+.abcRioButton.abcRioButtonLightBlue {
+    max-width: 215px !important;
+}
+.toast {
+    border: 1px solid #edf2f9;
+    background-color: #fff;
+    width: 350px !important;
+    box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
+}
+.is-invalid {
+    display: block;
+    font-size: 10px;
+    margin: auto 5px;
+}
+.is-folded .side-nav-inner li span {
+    display: none !important;
+}
+.main-content{
+    background: #f5f6fa;
+}
+div#user-wrapper .card {
+    background: #f5f6fa;
+    border: none;
+}
+
+th.sorting::before {
+    display: none !important;
+}
+th.sorting::after {
+    display: none !important;
+}
+th.sorting_asc::before {
+    display: none !important;
+}
+th.sorting_asc::after {
+    display: none !important;
+}
+div#DataTables_Table_0_info {
+    margin: 20px;
+}
+div#DataTables_Table_0_paginate {
+    margin: 20px;
+}
+select.custom-select.custom-select-sm.form-control.form-control-sm {
+    border: none !important;
+}
+.custom-select {
+    border: none !important;
+}
+#user_list tr {
+    margin: 5px 0;
+    line-height: 15px;
+    padding: 5px 0;
+    background: white;
+    border-radius: 4px;
+}
+#user_list tbody tr:hover {
+    background: #f8f9fc;
+    box-shadow: 6px 4px 8px 2px rgba(133,79,255,0.4);
+}
+
+#user_list{
+    border-collapse:separate;
+    border-spacing:0 15px;
+}
+#user_list
+{
+    border-collapse: separate;
+    border-radius: 10px;
+}
+
+#user_list tr
+{
+    border-radius: 5px;
+}
+
+#user_list tr td:first-child
+{
+   border-top-left-radius: 5px;
+   border-bottom-left-radius: 5px;
+}
+#user_list tr td:last-child
+{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+#user_list.collapse
+{
+    border-collapse: collapse;
+}
+table tr td{
+    border: none !important;
+}
+#user_list thead tr
+{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#user_list thead tr
+{
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}

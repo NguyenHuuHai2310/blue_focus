@@ -1,0 +1,47 @@
+body {
+    top: 0 !important;
+}
+#google_translate_element {
+    width: 0;
+    border: none;
+    height: 1px;
+}
+#google_translate_element span, .goog-te-banner-frame{
+    display: none !important;
+}
+#google_translate_element span{
+    display: none;
+}
+.skiptranslate.goog-te-gadget {
+    font-size: 0;
+    color: transparent;
+}
+.goog-te-gadget > div select {
+    width: 0;
+    border: none;
+    height: 1px;
+}
+.nk-header-tools {
+    display: flex;
+}
+
+.dropdown-language {
+    margin-right: 20px;
+}
+
+.dropdown-language .dropdown-item img, .dropdown-language .dropdown-toggle img{
+    width: 25px;
+    margin-right: 10px;
+}
+.dropdown-language .dropdown-toggle {
+    border: none;
+}
+.dropdown-language .dropdown-toggle:after {
+    content: "";
+}
+
+.skiptranslate iframe {
+    display: none !important
+}
+
+
