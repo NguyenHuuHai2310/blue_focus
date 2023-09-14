@@ -332,7 +332,7 @@
                       <h5 v-else-if="activeTab == 3" class="mb-0">Pages</h5>
                       <h5 v-else-if="activeTab == 4" class="mb-0">Ad Sets</h5>
                     </div>
-                    <div :style="{'display': activeTab == 1 ? 'none' : ''}" class="table-responsive m-t-30">
+                    <div :style="{'display': activeTab == 1 ? '' : 'none'}" class="table-responsive m-t-30">
                       <table id="table-datatable" class="table table-hover">
                         <thead>
                           <tr>
@@ -360,6 +360,95 @@
                               </button>
                               <button type="button" class="btn btn-primary" @click="getPages(business.id)">
                                 Get Pages
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div :style="{'display': activeTab == 2 ? '' : 'none'}" class="table-responsive m-t-30">
+                      <table id="table-datatable" class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Account ID</th>
+                            <th scope="col">Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(adAccount, index) in adAccounts">
+                            <th scope="row">{{ index + 1 }}</th>
+                            <td>
+                              <a href="javascript:void(0)" @click="getAdSets(adAccount.id)">{{ adAccount.account_id }}
+                              </a>
+                            </td>
+                            <td>{{ adAccount.name }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div :style="{'display': activeTab == 3 ? '' : 'none'}" class="table-responsive m-t-30">
+                      <table id="table-datatable" class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Page ID</th>
+                            <th scope="col">Name</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(page, index) in pages">
+                            <th scope="row">{{ index + 1 }}</th>
+                            <td>
+                              <a href="javascript:void(0)" @click="getPosts(page.id)">{{ page.id }}</a>
+                            </td>
+                            <td>{{ page.name }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                      <h5 v-else-if="activeTab == 3" class="mb-0">Page Posts</h5>
+                      <table id="table-datatable" class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Post ID</th>
+                            <th scope="col">Message</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(post, index) in posts">
+                            <th scope="row">{{ index + 1 }}</th>
+                            <td>{{ post.id }}</td>
+                            <td>{{ post.message }}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                    <div :style="{'display': activeTab == 4 ? '' : 'none'}" class="table-responsive m-t-30">
+                      <table id="table-datatable" class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Ad Set ID</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr v-for="(adSet, index) in adSets">
+                            <th scope="row">{{ index + 1 }}</th>
+                            <td>{{ adSet.id }}</td>
+                            <td>{{ adSet.name }}</td>
+                            <td>{{ adSet.status }}</td>
+                            <td>
+                              <button type="button" class="btn btn-success btn-sm"
+                                @click="setAdSetStatus(adSet.id, 'ACTIVE')">
+                                Active
+                              </button>
+                              <button type="button" class="btn btn-danger btn-sm"
+                                @click="setAdSetStatus(adSet.id, 'PAUSED')">
+                                Pause
                               </button>
                             </td>
                           </tr>
