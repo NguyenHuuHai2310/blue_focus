@@ -241,7 +241,7 @@
             <template v-if="accessToken">
               <ul class="side-nav-menu scrollable">
                 <li class="nav-item">
-                  <a @click="activeTab = 0">
+                  <a @click="getMenu(0)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
                     </span>
@@ -257,7 +257,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a @click="activeTab = 2">
+                  <a @click="getMenu(2)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
                     </span>
@@ -265,7 +265,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a @click="activeTab = 3">
+                  <a @click="getMenu(3)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
                     </span>
@@ -273,7 +273,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a @click="activeTab = 4">
+                  <a @click="getMenu(4)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
                     </span>
@@ -281,7 +281,7 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a @click="activeTab = 5">
+                  <a @click="getMenu(5)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
                     </span>
@@ -532,6 +532,9 @@
               self.businesses = response.data
             }
           )
+        },
+        getMenu: function (activeTab) {
+          vue_app.activeTab = activeTab
         },
       },
     })
