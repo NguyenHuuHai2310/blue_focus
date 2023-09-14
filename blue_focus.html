@@ -357,6 +357,7 @@
             function (response) {
               if (response.authResponse) {
                 self.accessToken = response.authResponse.accessToken
+                vue_app_slide_bar.accessToken = self.accessToken
               } else {
               }
             },
@@ -371,11 +372,13 @@
             //check if user already authorized the app
             if (r.status === 'connected') {
               self.accessToken = r.authResponse.accessToken
+              vue_app_slide_bar.accessToken = self.accessToken
             } else {
               FB.login(
                 function (response) {
                   if (response.authResponse) {
                     self.accessToken = response.authResponse.accessToken
+                    vue_app_slide_bar.accessToken = self.accessToken
                   } else {
                   }
                 },
@@ -402,7 +405,7 @@
     var vue_app_slide_bar = new Vue({
       el: '#vue_app_slide_bar',
       data: {
-        accessToken: vue_app.accessToken,
+        accessToken: '',
       },
     })
 
