@@ -1,473 +1,419 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="./assets/style.bundle.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-    <link rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/open-iconic/1.1.1/font/css/open-iconic.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+    />
     <title>Tools Bluefocus Agency</title>
-</head>
-
-<body class="bg-body page-loading-enabled">
-    <div class="d-flex flex-column flex-root">
-        <!--begin::Authentication - Sign-in -->
-        <div class="d-flex flex-column flex-lg-row flex-column-fluid">
-            <!--begin::Aside-->
-            <div class="d-flex flex-column flex-lg-row-auto w-xl-600px positon-xl-relative"
-                style="background-color: #ecf7f9">
-                <!--begin::Wrapper-->
-                <div class="d-flex flex-column position-xl-fixed top-0 bottom-0 w-xl-600px scroll-y">
-                    <!--begin::Content-->
-                    <div class="d-flex flex-row-fluid flex-column text-center p-10 pt-lg-20">
-                        <!--begin::Logo-->
-                        <a href="/auth/login" class="py-9 mb-5">
-                            <img alt="Logo" src="./assets/logo.svg" class="h-85px">
-                        </a>
-                        <!--end::Logo-->
-                        <!--begin::Title-->
-                        <h1 class="fw-bolder fs-2qx pb-5 pb-md-10" style="color: #986923;">Welcome to Tools Bluefocus
-                            Agency</h1>
-                        <!--end::Title-->
-                    </div>
-                    <!--end::Content-->
-                    <!--begin::Illustration-->
-                    <!-- <div class="d-flex flex-row-auto bgi-no-repeat bgi-position-x-center bgi-size-contain bgi-position-y-bottom min-h-100px min-h-lg-600px" style="background-image: url(./assets/landing_page.jpg)"></div> -->
-                    <!--end::Illustration-->
-                </div>
-                <!--end::Wrapper-->
+  </head>
+  <body>
+    <div id="app">
+      <div class="container-fluid">
+        <div class="row justify-content-md-center">
+          <h3 class="mb-4"><i class="fa-solid fa-rotate fa-spin"></i> {{ title }}</h3>
+          <template v-if="!accessToken">
+            <div class="col-3">
+              <h3>Welcome to Tools Bluefocus Agency</h3>
+              <button class="btn btn-primary" @click="login();">
+                <i class="fa-brands fa-facebook"></i> Login with Facebook
+              </button>
+              <a href="policy.html" class="btn btn-secondary" target="_blank">Privacy Policy</a>
             </div>
-            <!--end::Aside-->
-            <!--begin::Body-->
-            <div class="d-flex flex-column flex-lg-row-fluid py-10">
-                <!--begin::Content-->
-                <div class="d-flex flex-center flex-column flex-column-fluid login_one">
-                    <!--begin::Wrapper-->
-                    <div class="w-lg-500px p-10 p-lg-15 mx-auto">
-                        <!--begin::Form-->
-                        <form class="form w-100 fv-plugins-bootstrap5 fv-plugins-framework login"
-                            novalidate="novalidate">
-                            <!--begin::Heading-->
-                            <!-- <div class="text-center mb-10">
-                                <h1 class="text-dark mb-3">Đăng nhập hệ thống</h1>
-                            </div> -->
-                            <!--begin::Heading-->
-                            <div id="app">
-                                <div class="container-fluid">
-                                  <div class="row justify-content-md-center">
-                                    <!-- <h3 class="mb-4"><i class="fa-solid fa-rotate fa-spin"></i> {{ title }}</h3> -->
-                                    <template v-if="!accessToken">
-                                      <div class="text-center mb-10">
-                                        <h3>Welcome to Tools Bluefocus Agency</h3>
-                                        <button class="btn btn-primary" @click="login();">
-                                          <i class="fa-brands fa-facebook"></i> Login with Facebook
-                                        </button>
-                                        <a href="policy.html" class="btn btn-secondary" target="_blank">Privacy Policy</a>
-                                      </div>
-                                    </template>
-                                    <template v-if="accessToken">
-                                      <div class="col-3">
-                                        <div
-                                          class="nav flex-column nav-pills me-3 mb-4"
-                                          id="v-pills-tab"
-                                          role="tablist"
-                                          aria-orientation="vertical"
-                                        >
-                                          <button
-                                            :class="[activeTab == 0 ? 'nav-link active' : 'nav-link']"
-                                            @click="activeTab = 0"
-                                          >
-                                            Home
-                                          </button>
-                                          <button
-                                            :class="[activeTab == 1 ? 'nav-link active' : 'nav-link']"
-                                            @click="getBusinesses()"
-                                          >
-                                            Businesses
-                                          </button>
-                                          <button
-                                            :class="[activeTab == 2 ? 'nav-link active' : 'nav-link']"
-                                            @click="activeTab = 2"
-                                          >
-                                            Ad Accounts
-                                          </button>
-                                          <button
-                                            :class="[activeTab == 3 ? 'nav-link active' : 'nav-link']"
-                                            @click="activeTab = 3"
-                                          >
-                                            Pages
-                                          </button>
-                                          <button
-                                            :class="[activeTab == 4 ? 'nav-link active' : 'nav-link']"
-                                            @click="activeTab = 4"
-                                          >
-                                            Ad Sets
-                                          </button>
-                                          <button
-                                            :class="[activeTab == 5 ? 'nav-link active' : 'nav-link']"
-                                            @click="activeTab = 5"
-                                          >
-                                            Insights
-                                          </button>
-                                          <button class="nav-link" @click="logout()">Logout</button>
-                                        </div>
-                                      </div>
-                                      <div class="col-9">
-                                        <div class="tab-content" id="v-pills-tabContent">
-                                          <div
-                                            :class="[activeTab == 1 ? 'tab-pane fade active show' : 'tab-pane fade']"
-                                            id="v-pills-tab-1"
-                                            role="tabpanel"
-                                          >
-                                            <h3>Businesses</h3>
-                                            <table class="table">
-                                              <thead>
-                                                <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Business ID</th>
-                                                  <th scope="col">Name</th>
-                                                  <th scope="col">Total Ad Accounts</th>
-                                                  <th scope="col">Total Pages</th>
-                                                  <th scope="col">Action</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr v-for="(business, index) in businesses">
-                                                  <th scope="row">{{ index + 1 }}</th>
-                                                  <td>{{ business.id }}</td>
-                                                  <td>{{ business.name }}</td>
-                                                  <td>
-                                                    {{ business.owned_ad_accounts.summary.total_count +
-                                                    business.client_ad_accounts.summary.total_count }}
-                                                  </td>
-                                                  <td>{{ business.owned_pages.summary.total_count }}</td>
-                                                  <td>
-                                                    <button
-                                                      type="button"
-                                                      class="btn btn-primary"
-                                                      @click="getAdAccounts(business.id)"
-                                                    >
-                                                      Get Ad Accounts
-                                                    </button>
-                                                    <button
-                                                      type="button"
-                                                      class="btn btn-primary"
-                                                      @click="getPages(business.id)"
-                                                    >
-                                                      Get Pages
-                                                    </button>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </div>
-                                          <div
-                                            :class="[activeTab == 2 ? 'tab-pane fade active show' : 'tab-pane fade']"
-                                            id="v-pills-tab-2"
-                                            role="tabpanel"
-                                          >
-                                            <h3>Ad Accounts</h3>
-                                            <table class="table">
-                                              <thead>
-                                                <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Account ID</th>
-                                                  <th scope="col">Name</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr v-for="(adAccount, index) in adAccounts">
-                                                  <th scope="row">{{ index + 1 }}</th>
-                                                  <td>
-                                                    <a href="javascript:void(0)" @click="getAdSets(adAccount.id)"
-                                                      >{{ adAccount.account_id }}
-                                                    </a>
-                                                  </td>
-                                                  <td>{{ adAccount.name }}</td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </div>
-                                          <div
-                                            :class="[activeTab == 3 ? 'tab-pane fade active show' : 'tab-pane fade']"
-                                            id="v-pills-tab-3"
-                                            role="tabpanel"
-                                          >
-                                            <h3>Pages</h3>
-                                            <table class="table">
-                                              <thead>
-                                                <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Page ID</th>
-                                                  <th scope="col">Name</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr v-for="(page, index) in pages">
-                                                  <th scope="row">{{ index + 1 }}</th>
-                                                  <td>
-                                                    <a href="javascript:void(0)" @click="getPosts(page.id)">{{ page.id }}</a>
-                                                  </td>
-                                                  <td>{{ page.name }}</td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                            <hr />
-                                            <h3>Page Posts</h3>
-                                            <table class="table">
-                                              <thead>
-                                                <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Post ID</th>
-                                                  <th scope="col">Message</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr v-for="(post, index) in posts">
-                                                  <th scope="row">{{ index + 1 }}</th>
-                                                  <td>{{ post.id }}</td>
-                                                  <td>{{ post.message }}</td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </div>
-                                          <div
-                                            :class="[activeTab == 4 ? 'tab-pane fade active show' : 'tab-pane fade']"
-                                            id="v-pills-tab-4"
-                                            role="tabpanel"
-                                          >
-                                            <h3>Ad Sets</h3>
-                                            <table class="table">
-                                              <thead>
-                                                <tr>
-                                                  <th scope="col">#</th>
-                                                  <th scope="col">Ad Set ID</th>
-                                                  <th scope="col">Name</th>
-                                                  <th scope="col">Status</th>
-                                                  <th scope="col">Action</th>
-                                                </tr>
-                                              </thead>
-                                              <tbody>
-                                                <tr v-for="(adSet, index) in adSets">
-                                                  <th scope="row">{{ index + 1 }}</th>
-                                                  <td>{{ adSet.id }}</td>
-                                                  <td>{{ adSet.name }}</td>
-                                                  <td>{{ adSet.status }}</td>
-                                                  <td>
-                                                    <button
-                                                      type="button"
-                                                      class="btn btn-success btn-sm"
-                                                      @click="setAdSetStatus(adSet.id, 'ACTIVE')"
-                                                    >
-                                                      Active
-                                                    </button>
-                                                    <button
-                                                      type="button"
-                                                      class="btn btn-danger btn-sm"
-                                                      @click="setAdSetStatus(adSet.id, 'PAUSED')"
-                                                    >
-                                                      Pause
-                                                    </button>
-                                                  </td>
-                                                </tr>
-                                              </tbody>
-                                            </table>
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </template>
-                                  </div>
-                                </div>
-                            </div>
-                        </form>
-                        <!--end::Form-->
-                    </div>
-                    <!--end::Wrapper-->
-                </div>
-                <!--end::Content-->
+          </template>
+          <template v-if="accessToken">
+            <div class="col-3">
+              <div
+                class="nav flex-column nav-pills me-3 mb-4"
+                id="v-pills-tab"
+                role="tablist"
+                aria-orientation="vertical"
+              >
+                <button
+                  :class="[activeTab == 0 ? 'nav-link active' : 'nav-link']"
+                  @click="activeTab = 0"
+                >
+                  Home
+                </button>
+                <button
+                  :class="[activeTab == 1 ? 'nav-link active' : 'nav-link']"
+                  @click="getBusinesses()"
+                >
+                  Businesses
+                </button>
+                <button
+                  :class="[activeTab == 2 ? 'nav-link active' : 'nav-link']"
+                  @click="activeTab = 2"
+                >
+                  Ad Accounts
+                </button>
+                <button
+                  :class="[activeTab == 3 ? 'nav-link active' : 'nav-link']"
+                  @click="activeTab = 3"
+                >
+                  Pages
+                </button>
+                <button
+                  :class="[activeTab == 4 ? 'nav-link active' : 'nav-link']"
+                  @click="activeTab = 4"
+                >
+                  Ad Sets
+                </button>
+                <button
+                  :class="[activeTab == 5 ? 'nav-link active' : 'nav-link']"
+                  @click="activeTab = 5"
+                >
+                  Insights
+                </button>
+                <button class="nav-link" @click="logout()">Logout</button>
+              </div>
             </div>
-            <!--end::Body-->
+            <div class="col-9">
+              <div class="tab-content" id="v-pills-tabContent">
+                <div
+                  :class="[activeTab == 1 ? 'tab-pane fade active show' : 'tab-pane fade']"
+                  id="v-pills-tab-1"
+                  role="tabpanel"
+                >
+                  <h3>Businesses</h3>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Business ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Total Ad Accounts</th>
+                        <th scope="col">Total Pages</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(business, index) in businesses">
+                        <th scope="row">{{ index + 1 }}</th>
+                        <td>{{ business.id }}</td>
+                        <td>{{ business.name }}</td>
+                        <td>
+                          {{ business.owned_ad_accounts.summary.total_count +
+                          business.client_ad_accounts.summary.total_count }}
+                        </td>
+                        <td>{{ business.owned_pages.summary.total_count }}</td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            @click="getAdAccounts(business.id)"
+                          >
+                            Get Ad Accounts
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-primary"
+                            @click="getPages(business.id)"
+                          >
+                            Get Pages
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  :class="[activeTab == 2 ? 'tab-pane fade active show' : 'tab-pane fade']"
+                  id="v-pills-tab-2"
+                  role="tabpanel"
+                >
+                  <h3>Ad Accounts</h3>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Account ID</th>
+                        <th scope="col">Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(adAccount, index) in adAccounts">
+                        <th scope="row">{{ index + 1 }}</th>
+                        <td>
+                          <a href="javascript:void(0)" @click="getAdSets(adAccount.id)"
+                            >{{ adAccount.account_id }}
+                          </a>
+                        </td>
+                        <td>{{ adAccount.name }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  :class="[activeTab == 3 ? 'tab-pane fade active show' : 'tab-pane fade']"
+                  id="v-pills-tab-3"
+                  role="tabpanel"
+                >
+                  <h3>Pages</h3>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Page ID</th>
+                        <th scope="col">Name</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(page, index) in pages">
+                        <th scope="row">{{ index + 1 }}</th>
+                        <td>
+                          <a href="javascript:void(0)" @click="getPosts(page.id)">{{ page.id }}</a>
+                        </td>
+                        <td>{{ page.name }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <hr />
+                  <h3>Page Posts</h3>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Post ID</th>
+                        <th scope="col">Message</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(post, index) in posts">
+                        <th scope="row">{{ index + 1 }}</th>
+                        <td>{{ post.id }}</td>
+                        <td>{{ post.message }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div
+                  :class="[activeTab == 4 ? 'tab-pane fade active show' : 'tab-pane fade']"
+                  id="v-pills-tab-4"
+                  role="tabpanel"
+                >
+                  <h3>Ad Sets</h3>
+                  <table class="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Ad Set ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr v-for="(adSet, index) in adSets">
+                        <th scope="row">{{ index + 1 }}</th>
+                        <td>{{ adSet.id }}</td>
+                        <td>{{ adSet.name }}</td>
+                        <td>{{ adSet.status }}</td>
+                        <td>
+                          <button
+                            type="button"
+                            class="btn btn-success btn-sm"
+                            @click="setAdSetStatus(adSet.id, 'ACTIVE')"
+                          >
+                            Active
+                          </button>
+                          <button
+                            type="button"
+                            class="btn btn-danger btn-sm"
+                            @click="setAdSetStatus(adSet.id, 'PAUSED')"
+                          >
+                            Pause
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </template>
         </div>
-        <!--end::Authentication - Sign-in-->
+      </div>
     </div>
     <div id="fb-root"></div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.24.0/axios.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <script>
-        var app = new Vue({
-            el: '#app',
-            data: {
-                username: '',
-                activeTab: 0,
-                title: 'Tools Bluefocus Agency',
-                accessToken: '',
-                adAccounts: [],
-                pages: [],
-                posts: [],
-                adAccountUsers: [],
-                businesses: [],
-                adSets: [],
-            },
-            methods: {
-                login: function () {
-                    const self = this
-                    FB.login(
-                        function (response) {
-                            if (response.authResponse) {
-                                self.accessToken = response.authResponse.accessToken
-                            } else {
-                            }
-                        },
-                        {
-                            auth_type: 'reauthenticate',
-                            scope:
-                                'public_profile,email,ads_read,business_management,pages_show_list,pages_read_engagement,ads_management,pages_read_user_content',
-                            return_scopes: true,
-                        }
-                    )
-                    FB.getLoginStatus(function (r) {
-                        //check if user already authorized the app
-                        if (r.status === 'connected') {
-                            self.accessToken = r.authResponse.accessToken
-                        } else {
-                            FB.login(
-                                function (response) {
-                                    if (response.authResponse) {
-                                        self.accessToken = response.authResponse.accessToken
-                                    } else {
-                                    }
-                                },
-                                {
-                                    scope:
-                                        'public_profile,email,ads_read,business_management,pages_show_list,pages_read_engagement,ads_management,pages_read_user_content',
-                                }
-                            )
-                        }
-                    })
-                },
-                logout: function () {
-                    const self = this
-                    FB.logout(function (response) {
-                        self.accessToken = ''
-                    })
-                },
-                getMe: function () {
-                    FB.api('/me', function (response) { })
-                },
-                getBusinesses: function () {
-                    const self = this
-                    self.activeTab = 1
-                    FB.api(
-                        '/me/businesses?fields=id,name,owned_ad_accounts.limit(0).summary(1),client_ad_accounts.limit(0).summary(1),owned_pages.limit(0).summary(1)&limit=9999',
-                        function (response) {
-                            self.businesses = response.data
-                        }
-                    )
-                },
-                getAdAccounts: async function (businessId) {
-                    const self = this
-                    self.activeTab = 2
-                    self.adAccounts = []
-                    await FB.api(
-                        `/${businessId}/owned_ad_accounts?fields=account_id,name&limit=9999`,
-                        function (response) {
-                            response.data.map((adAccount) => {
-                                self.adAccounts.push(adAccount)
-                            })
-                        }
-                    )
-                    await FB.api(
-                        `/${businessId}/client_ad_accounts?fields=account_id,name&limit=9999`,
-                        function (response) {
-                            response.data.map((adAccount) => {
-                                self.adAccounts.push(adAccount)
-                            })
-                        }
-                    )
-                },
-                getPages: function (businessId) {
-                    const self = this
-                    self.activeTab = 3
-                    FB.api(`/${businessId}/owned_pages?fields=id,name&limit=9999`, function (response) {
-                        self.pages = response.data
-                    })
-                },
-                getPosts: function (pageId) {
-                    const self = this
-                    FB.api(`/${pageId}/feed?fields=&limit=9999`, function (response) {
-                        self.posts = response.data
-                    })
-                },
-                getAdAccountUsers: function (accountId) {
-                    const self = this
-                    FB.api(`/${accountId}/users?limit=9999`, function (response) {
-                        self.adAccountUsers = response.data
-                    })
-                },
-                getAdSets: function (accountId) {
-                    const self = this
-                    self.activeTab = 4
-                    FB.api(`/${accountId}/adsets?fields=id,name,status&limit=9999`, function (response) {
-                        self.adSets = response.data
-                    })
-                },
-                setAdSetStatus: function (adSetId, status) {
-                    const self = this
-                    self.activeTab = 4
-                    FB.api(`/${adSetId}/?status=${status}`, 'POST', function (response) {
-                        const index = self.adSets.findIndex((x) => x.id === adSetId)
-                        self.adSets[index].status = status
-                        alert('Update successfully!')
-                    })
-                },
-            },
+      var app = new Vue({
+        el: '#app',
+        data: {
+          username: '',
+          activeTab: 0,
+          title: 'Tools Bluefocus Agency',
+          accessToken: '',
+          adAccounts: [],
+          pages: [],
+          posts: [],
+          adAccountUsers: [],
+          businesses: [],
+          adSets: [],
+        },
+        methods: {
+          login: function () {
+            const self = this
+            FB.login(
+              function (response) {
+                if (response.authResponse) {
+                  self.accessToken = response.authResponse.accessToken
+                } else {
+                }
+              },
+              {
+                auth_type: 'reauthenticate',
+                scope:
+                  'public_profile,email,ads_read,business_management,pages_show_list,pages_read_engagement,ads_management,pages_read_user_content',
+                return_scopes: true,
+              }
+            )
+            FB.getLoginStatus(function (r) {
+              //check if user already authorized the app
+              if (r.status === 'connected') {
+                self.accessToken = r.authResponse.accessToken
+              } else {
+                FB.login(
+                  function (response) {
+                    if (response.authResponse) {
+                      self.accessToken = response.authResponse.accessToken
+                    } else {
+                    }
+                  },
+                  {
+                    scope:
+                      'public_profile,email,ads_read,business_management,pages_show_list,pages_read_engagement,ads_management,pages_read_user_content',
+                  }
+                )
+              }
+            })
+          },
+          logout: function () {
+            const self = this
+            FB.logout(function (response) {
+              self.accessToken = ''
+            })
+          },
+          getMe: function () {
+            FB.api('/me', function (response) {})
+          },
+          getBusinesses: function () {
+            const self = this
+            self.activeTab = 1
+            FB.api(
+              '/me/businesses?fields=id,name,owned_ad_accounts.limit(0).summary(1),client_ad_accounts.limit(0).summary(1),owned_pages.limit(0).summary(1)&limit=9999',
+              function (response) {
+                self.businesses = response.data
+              }
+            )
+          },
+          getAdAccounts: async function (businessId) {
+            const self = this
+            self.activeTab = 2
+            self.adAccounts = []
+            await FB.api(
+              `/${businessId}/owned_ad_accounts?fields=account_id,name&limit=9999`,
+              function (response) {
+                response.data.map((adAccount) => {
+                  self.adAccounts.push(adAccount)
+                })
+              }
+            )
+            await FB.api(
+              `/${businessId}/client_ad_accounts?fields=account_id,name&limit=9999`,
+              function (response) {
+                response.data.map((adAccount) => {
+                  self.adAccounts.push(adAccount)
+                })
+              }
+            )
+          },
+          getPages: function (businessId) {
+            const self = this
+            self.activeTab = 3
+            FB.api(`/${businessId}/owned_pages?fields=id,name&limit=9999`, function (response) {
+              self.pages = response.data
+            })
+          },
+          getPosts: function (pageId) {
+            const self = this
+            FB.api(`/${pageId}/feed?fields=&limit=9999`, function (response) {
+              self.posts = response.data
+            })
+          },
+          getAdAccountUsers: function (accountId) {
+            const self = this
+            FB.api(`/${accountId}/users?limit=9999`, function (response) {
+              self.adAccountUsers = response.data
+            })
+          },
+          getAdSets: function (accountId) {
+            const self = this
+            self.activeTab = 4
+            FB.api(`/${accountId}/adsets?fields=id,name,status&limit=9999`, function (response) {
+              self.adSets = response.data
+            })
+          },
+          setAdSetStatus: function (adSetId, status) {
+            const self = this
+            self.activeTab = 4
+            FB.api(`/${adSetId}/?status=${status}`, 'POST', function (response) {
+              const index = self.adSets.findIndex((x) => x.id === adSetId)
+              self.adSets[index].status = status
+              alert('Update successfully!')
+            })
+          },
+        },
+      })
+
+      window.fbAsyncInit = function () {
+        FB.init({
+          appId: '517460573827733',
+          cookie: true,
+          xfbml: true,
+          version: 'v17.0',
         })
 
-        window.fbAsyncInit = function () {
-            FB.init({
-                appId: '657874885318464',
-                cookie: true,
-                xfbml: true,
-                version: 'v17.0',
-            })
-
-            FB.AppEvents.logPageView()
+        FB.AppEvents.logPageView()
+      }
+      ;(function (d, s, id) {
+        var js,
+          fjs = d.getElementsByTagName(s)[0]
+        if (d.getElementById(id)) {
+          return
         }
-            ; (function (d, s, id) {
-                var js,
-                    fjs = d.getElementsByTagName(s)[0]
-                if (d.getElementById(id)) {
-                    return
-                }
-                js = d.createElement(s)
-                js.id = id
-                js.src = 'https://connect.facebook.net/en_US/sdk.js'
-                fjs.parentNode.insertBefore(js, fjs)
-            })(document, 'script', 'facebook-jssdk')
+        js = d.createElement(s)
+        js.id = id
+        js.src = 'https://connect.facebook.net/en_US/sdk.js'
+        fjs.parentNode.insertBefore(js, fjs)
+      })(document, 'script', 'facebook-jssdk')
     </script>
-    <div class="footer py-4 d-flex flex-lg-column" id="kt_footer" style="background-color: #ecf7f9">
-        <!--begin::Container-->
-        <div class="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-center mt-10">
-            <!--begin::Copyright-->
-            <div class="text-dark order-2 order-md-1">
-                <span class="text-muted fw-bold me-1">&copy; 2023 Tools Bluefocus Agency. All rights reserved.</span>
-            </div>
-            <!--end::Copyright-->
-        </div>
-        <!--end::Container-->
-    </div>
-</body>
-
+  </body>
 </html>
