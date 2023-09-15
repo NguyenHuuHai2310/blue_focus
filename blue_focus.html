@@ -70,7 +70,7 @@
           <div id="vue_app_slide_bar">
             <template v-if="accessToken">
               <ul class="side-nav-menu scrollable">
-                <li class="nav-item" :class="{ 'active': isActive && activeTab == 0 }" @click="toggleActive">
+                <li class="nav-item" :class="{ 'active': activeTab == 0 }" >
                   <a @click="getMenu(0)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
@@ -78,7 +78,7 @@
                     <span class="title">Home</span>
                   </a>
                 </li>
-                <li class="nav-item" :class="{ 'active': isActive && activeTab == 1 }" @click="toggleActive">
+                <li class="nav-item" :class="{ 'active': activeTab == 1 }" >
                   <a @click="getBusinesses()">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
@@ -86,7 +86,7 @@
                     <span class="title">Businesses</span>
                   </a>
                 </li>
-                <li class="nav-item" :class="{ 'active': isActive && activeTab == 2 }" @click="toggleActive">
+                <li class="nav-item" :class="{ 'active': activeTab == 2 }" >
                   <a @click="getMenu(2)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
@@ -94,7 +94,7 @@
                     <span class="title">Ad Accounts</span>
                   </a>
                 </li>
-                <li class="nav-item" :class="{ 'active': isActive && activeTab == 3 }" @click="toggleActive">
+                <li class="nav-item" :class="{ 'active': activeTab == 3 }" >
                   <a @click="getMenu(3)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
@@ -102,7 +102,7 @@
                     <span class="title">Pages</span>
                   </a>
                 </li>
-                <li class="nav-item" :class="{ 'active': isActive && activeTab == 4 }" @click="toggleActive">
+                <li class="nav-item" :class="{ 'active': activeTab == 4 }" >
                   <a @click="getMenu(4)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
@@ -110,7 +110,7 @@
                     <span class="title">Ad Sets</span>
                   </a>
                 </li>
-                <li class="nav-item" :class="{ 'active': isActive && activeTab == 5 }" @click="toggleActive">
+                <li class="nav-item" :class="{ 'active': activeTab == 5 }" >
                   <a @click="getMenu(5)">
                     <span class="icon-holder">
                       <i class="anticon anticon-home" style="color:tomato"></i>
@@ -118,7 +118,7 @@
                     <span class="title">Insights</span>
                   </a>
                 </li>
-                <li class="nav-item" :class="{ 'active': isActive && activeTab == 6 }" @click="toggleActive">
+                <li class="nav-item" :class="{ 'active': activeTab == 6 }" >
                   <a @click="logout()">
                     <span class="icon-holder">
                       <i class="anticon anticon-logout" style="color:tomato"></i>
@@ -476,7 +476,6 @@
         accessToken: '',
         activeTab: 0,
         businesses: [],
-        isActive: false,
       },
       methods: {
         logout: function () {
@@ -500,9 +499,6 @@
         getMenu: function (activeTab) {
           this.activeTab = activeTab
           vue_app.activeTab = activeTab
-        },
-        toggleActive: function () {
-          this.isActive = !this.isActive;
         },
       },
     })
