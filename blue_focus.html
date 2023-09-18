@@ -68,6 +68,9 @@
       <div class="side-nav">
         <div class="side-nav-inner">
           <div id="vue_app_slide_bar">
+            <!-- <template v-if="!accessToken">
+              <img src="./assets/images/logo/logo.png" alt="Logo" style="width: 230px; height: 271px">
+            </template> -->
             <template v-if="accessToken">
               <ul class="side-nav-menu scrollable">
                 <li class="nav-item" :class="{ 'active': activeTab == 0 }" >
@@ -483,6 +486,7 @@
             '/me/businesses?fields=id,name,owned_ad_accounts.limit(0).summary(1),client_ad_accounts.limit(0).summary(1),owned_pages.limit(0).summary(1)&limit=9999',
             function (response) {
               self.businesses = response.data
+              vue_app.businesses = self.businesses
             }
           )
         },
